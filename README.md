@@ -169,6 +169,12 @@ On Linux find executable file `./darknet` in the root directory, while on Window
 
 * Yolo v3 COCO-model: `darknet.exe detector demo data/coco.data yolov3.cfg yolov3.weights http://192.168.0.80:8080/video?dummy=param.mjpg -i 0`
 
+#### For using Yolo with ZED
+1. Make sure to compile darknet with the flags `GPU=1` , `LIBSO=1`, `OPENCV=1` and `ZED_CAMERA=1` in the `Makefile`. It is also recommended to compile it with `CUDNN=1` to speed up the detection.
+2. `LIBSO=1` will generate two files - `libdarknet.so` and `uselib` that are required to run YOLO with the ZED camera.
+3. To test, download the YoloV3 weights from https://pjreddie.com/media/files/yolov3.weights (See [Pre-trained models](#pre-trained-models) for other weights and cfg)
+4. Run `run_zed.sh` from the GUI to see the live detection in action!
+
 ### How to compile on Linux
 
 Just do `make` in the darknet directory.
@@ -182,6 +188,8 @@ Before make, you can set such options in the `Makefile`: [link](https://github.c
 * `OPENMP=1` to build with OpenMP support to accelerate Yolo by using multi-core CPU
 * `LIBSO=1` to build a library `darknet.so` and binary runable file `uselib` that uses this library. Or you can try to run so `LD_LIBRARY_PATH=./:$LD_LIBRARY_PATH ./uselib test.mp4` How to use this SO-library from your own code - you can look at C++ example: https://github.com/AlexeyAB/darknet/blob/master/src/yolo_console_dll.cpp
     or use in such a way: `LD_LIBRARY_PATH=./:$LD_LIBRARY_PATH ./uselib data/coco.names cfg/yolov3.cfg yolov3.weights test.mp4`
+    
+    Note: Docker container for running ZED with Yolo is available by StereoLab at https://github.com/stereolabs/zed-yolo
 * `ZED_CAMERA=1` to build a library with ZED-3D-camera support (should be ZED SDK installed), then run
     `LD_LIBRARY_PATH=./:$LD_LIBRARY_PATH ./uselib data/coco.names cfg/yolov3.cfg yolov3.weights zed_camera`
 
