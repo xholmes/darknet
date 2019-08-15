@@ -4,7 +4,7 @@ CUDNN_HALF=1
 OPENCV=1
 AVX=0
 OPENMP=0
-LIBSO=0
+LIBSO=1
 ZED_CAMERA=1
 
 # set GPU=1 and CUDNN=1 to speedup on GPU
@@ -99,7 +99,7 @@ ifeq ($(CUDNN), 1)
 COMMON+= -DCUDNN
 ifeq ($(OS),Darwin) #MAC
 CFLAGS+= -DCUDNN -I/usr/local/cuda/include
-LDFLAGS+= -L/usr/local/cuda/lib -lcudnn
+LDFLAGS+= -L/usr/local/cuda/lib64 -lcudnn
 else
 CFLAGS+= -DCUDNN -I/usr/local/cudnn/include
 LDFLAGS+= -L/usr/local/cudnn/lib64 -lcudnn
