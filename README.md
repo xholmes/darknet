@@ -436,6 +436,8 @@ It will create `.txt`-file for each `.jpg`-image-file - in the same directory an
  **Note:** After training use such command for detection: `darknet.exe detector test data/obj.data yolo-obj.cfg yolo-obj_8000.weights`
  
   **Note:** if error `Out of memory` occurs then in `.cfg`-file you should increase `subdivisions=16`, 32 or 64: [link](https://github.com/AlexeyAB/darknet/blob/0039fd26786ab5f71d5af725fc18b3f521e7acfd/cfg/yolov3.cfg#L4)
+  
+  **Note:** if training on rectangular images, set `letter_box=1` under `[net]` in the config file and use `-letter_box` argument at the end of the training command line to maintain 1:1 aspect ration when resizing.
  
 ### How to train tiny-yolo (to detect your custom objects):
 
